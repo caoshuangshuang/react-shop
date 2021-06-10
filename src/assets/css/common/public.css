@@ -1,0 +1,37 @@
+*{
+  margin:0px;
+  padding:0px;
+}
+ul,li{
+  list-style: none;
+}
+input{
+  outline: none;
+  border-radius: 0px;
+  border: 0 none;
+}
+html,body{
+  font-size: 20px !important;
+  min-height: 100%;
+  line-height: 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-tap-highlight-color: rgba(0,0,0,0); /*禁止链接高亮*/
+  -webkit-touch-callout: none;/*禁止链接长按弹出选项*/
+  background-color: #f5f5f9;
+}
+
+.null-item{
+  margin-top:0.5rem;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.hide{
+  display: none;
+}
+
+.height-hide{
+  height: 0px;
+  overflow: hidden;
+}

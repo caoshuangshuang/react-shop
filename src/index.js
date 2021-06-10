@@ -1,15 +1,40 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+/*
+ * @Description:
+ * @version: 1.0.0
+ * @Author: 曹双双
+ * @Date: 2021-03-23 10:53:55
+ * @LastEditors: 曹双双
+ * @LastEditTime: 2021-06-10 14:16:37
+ */
+import "babel-polyfill";
+import "url-search-params-polyfill";
+import "whatwg-fetch";
+import React from "react";
+import ReactDOM from "react-dom";
+import RouterComponent from "./Router";
+import reportWebVitals from "./reportWebVitals";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import reducers from './reducers'
+import 'lib-flexible'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import "./assets/css/common/public.css";
+import "./assets/css/iconfont/index.css"
+
+let store = createStore(reducers);
+class Index extends React.Component {
+  render() {
+    return (
+      <React.Fragment>
+        <Provider store={store}>
+          <RouterComponent />
+        </Provider>
+      </React.Fragment>
+    );
+  }
+}
+
+ReactDOM.render(<Index />, document.getElementById("root"));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

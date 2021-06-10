@@ -1,0 +1,61 @@
+.search-header {
+  width: 100%;
+  height: 2.5rem;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  background: linear-gradient(
+    rgba(1, 1, 1, 0.2) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  box-sizing: border-box;
+
+  &.red-bg {
+    background: linear-gradient(
+      rgba(235, 22, 37) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  .classify-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    background: url("~src/assets/images/common/class.png") no-repeat center / 100%;
+  }
+
+  .search-wrap {
+    width: 70%;
+    height: 1.3rem;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 0.7rem;
+    display: flex;
+    align-items: center;
+
+    .search-icon {
+      width: 1.2rem;
+      height: 1.2rem;
+      background: url("~src/assets/images/common/search.png") no-repeat center /
+        100%;
+      margin-left: 0.3rem;
+      margin-right: 0.2rem;
+    }
+
+    .search-text {
+      width: 80%;
+      font-size: 0.7rem;
+      color: #fff;
+    }
+  }
+
+  .login-wrap {
+    .login-text {
+      font-size: 0.8rem;
+      color: #fff;
+    }
+  }
+}
