@@ -1,0 +1,65 @@
+.swiper-wrap{
+  width: 100%;
+  height: 350px;
+  margin-top:60px;
+  text-align: center;
+
+  img{
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.goods-ele-main{
+  background: #ffffff;
+  padding:10px 15px;
+
+  .goods-ele-title{
+    width: 100%;
+    font-size: 14px;
+    line-height: 25px;
+  }
+
+  .goods-ele-price{
+    font-size: 14px;
+    color:#f93036;
+    line-height: 25px;
+  }
+
+  .goods-express-sales{
+    display: flex;
+    justify-content: space-between;
+
+    .text{
+      font-size: 12px;
+      line-height: 25px;
+      color:#969696;
+    }
+  }
+}
+
+.reviews-main{
+  width: 100%;
+  background: #fff;
+  margin-top:20px;
+  padding:15px;
+  margin-bottom: 70px;
+  box-sizing: border-box;
+
+  .reviews-title{
+    color:#7b7f82;
+    font-size: 16px;
+  }
+
+  .reviews-more{
+    width: 110px;
+    height: 30px;
+    border:1px solid #D50A17;
+    line-height: 30px;
+    text-align: center;
+    font-size: 14px;
+    margin:0 auto;
+    border-radius: 5px;
+    margin-top:20px;
+  }
+}

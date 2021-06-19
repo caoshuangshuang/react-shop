@@ -145,7 +145,7 @@ export default class GoodsComponent extends React.Component {
             </div>
           </div>
           <div className={Css["goods-content"]}>
-            <GoodsItems list={this.state.aGoods}/>
+            <GoodsItems list={this.state.aGoods} goPage={(url)=>this.goPage(url)}/>
           </div>
         </div>
       </div>

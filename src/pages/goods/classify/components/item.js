@@ -19,7 +19,7 @@ export default class ItemComponent extends React.Component {
                     {item.goods && item.goods.length
                       ? item.goods.map((subItem, subIndex) => {
                           return (
-                            <ul key={subIndex}>
+                            <ul key={subIndex} onClick={()=>{this.props.goPage('goods/detail?gid='+subItem.gid)}}>
                               <li>
                                 <LazyLoad
                                   height={100}

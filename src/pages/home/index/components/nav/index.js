@@ -34,7 +34,7 @@ class QuickNav extends React.Component {
       {this.state.aNav && this.state.aNav.length
         ? this.state.aNav.map((item, index) => {
             return (
-              <ul className={Css["item"]} key={index}>
+              <ul className={Css["item"]} key={index} onClick={()=>this.props.goPage('goods/classify?cid='+item.cid)}>
                 <li className={Css["item-img"]}>
                 <img src={require('src/assets/images/common/lazyImg.jpg')} alt={item.title} data-echo={item.image} />
                 </li>

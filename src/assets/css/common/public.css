@@ -1,6 +1,8 @@
 *{
   margin:0px;
   padding:0px;
+  touch-action: none;
+  touch-action: pan-y;
 }
 ul,li{
   list-style: none;

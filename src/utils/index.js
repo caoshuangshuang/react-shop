@@ -36,4 +36,11 @@ function localParam(search,hash){
     hash:fn(hash,new RegExp("([^#=&]+)(=([^&]*))?","g"))||{}
   };
 }
-export {lazyImg,localParam,genUrlParam}
+
+function setScrollTop(val=0){
+  setTimeout(()=>{
+    document.body.scrollTop=val
+    document.documentElement.scrollTop=val
+  })
+}
+export {lazyImg,localParam,genUrlParam,setScrollTop}

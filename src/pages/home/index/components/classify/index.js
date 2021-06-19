@@ -48,6 +48,7 @@ class SearchBar extends React.Component {
                                 <div
                                   key={index}
                                   className={Css["goods-level1-item0"]}
+                                  onClick={()=>this.props.goPage('goods/detail?gid='+curItem.gid)}
                                 >
                                   <div className={Css["goods-title2"]}>
                                     {curItem.title}
@@ -69,7 +70,7 @@ class SearchBar extends React.Component {
                       </div>
                     ) : (
                       <div className={Css["goods-level1-wrap"]}>
-                        <div className={Css["goods-level1-item0"]}>
+                        <div className={Css["goods-level1-item0"]}  onClick={()=>this.props.goPage('goods/detail?gid='+item.items[0].gid)}>
                           <div className={Css["goods-title"]}>
                             {item.items && item.items.length
                               ? item.items[0].title
@@ -98,10 +99,10 @@ class SearchBar extends React.Component {
                             />
                           </div>
                         </div>
-                        <div className={Css["goods-level1-item1"]}>
+                        <div className={Css["goods-level1-item1"]} >
                           {item.items && item.items.length
                             ? item.items.slice(1, 3).map((curItem, index) => (
-                                <div className={Css["goods-row"]} key={index}>
+                                <div className={Css["goods-row"]} key={index} onClick={()=>this.props.goPage('goods/detail?gid='+curItem.gid)}>
                                   <div className={Css["goods-row-title"]}>
                                     {curItem.title}
                                   </div>
@@ -128,7 +129,7 @@ class SearchBar extends React.Component {
                             .slice(index % 2 === 1 ? 2 : 3)
                             .map((curItem, index) => {
                               return (
-                                <div className={Css["goods-list"]} key={index}>
+                                <div className={Css["goods-list"]} key={index} onClick={()=>this.props.goPage('goods/detail?gid='+curItem.gid)}>
                                   <div className={Css["title"]}>
                                     {curItem.title}
                                   </div>

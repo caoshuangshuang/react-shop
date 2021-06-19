@@ -39,7 +39,7 @@ class Recommend extends React.Component {
         <div className={Css["reco-item-wrap"]}>
           {this.state.aRecoGoods.map((item, index) => {
             return (
-              <div key={index} className={Css["reco-item"]}>
+              <div key={index} className={Css["reco-item"]} onClick={()=>this.props.goPage('goods/detail?gid='+item.gid)}>
                 <div className={Css["image"]}>
                   <img src={require('src/assets/images/common/lazyImg.jpg')} alt={item.title} data-echo={item.image}/>
                 </div>

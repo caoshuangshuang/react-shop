@@ -33,3 +33,21 @@ export const getParam=(param={})=>{
     '/api/home/goods/param'+genUrlParam(param)
   )
 }
+
+// 获取商品详情
+export const getGoodsInfo=(param={})=>{
+  param.token=config.token
+  return request(
+    '/api/home/goods/info'+genUrlParam(param)
+  )
+}
+
+// 获取商品评价
+export const getGoodsReviews=(param={})=>{
+  param.token=config.token
+  return request(
+    '/api/home/reviews/index'+genUrlParam(param)
+  )
+}
+
+

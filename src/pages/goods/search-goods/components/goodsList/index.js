@@ -2,8 +2,9 @@ import React from "react";
 import Css from "./index.module.scss";
 import { PullToRefresh, ListView } from "antd-mobile";
 import LazyLoad from "react-lazyload";
-
-export default class GoodsList extends React.Component {
+import config from "src/config/config";
+import {withRouter} from 'react-router-dom'
+ class GoodsList extends React.Component {
   constructor(props) {
     super(props);
     const dataSource = new ListView.DataSource({
@@ -27,10 +28,14 @@ export default class GoodsList extends React.Component {
     );
   }
 
+  goPage(pUrl) {
+    this.props.history.push(config.path + pUrl);
+  }
+
   render() {
     const row = (rowData, sectionId, rowId) => {
       return (
-        <div key={rowId} className={Css["goods-list"]}>
+        <div key={rowId} className={Css["goods-list"]} onClick={()=>{this.goPage('goods/detail?gid='+rowData.gid)}}>
           <div className={Css["goods-image"]}>
             <LazyLoad
               height={100}
@@ -72,7 +77,6 @@ export default class GoodsList extends React.Component {
     return (
       <div id="goods-wrapper" className={Css["goods-main"]}>
         <ListView
-          ref={(el) => (this.lv = el)}
           dataSource={this.state.dataSource}
           renderFooter={footer}
           renderRow={row}
@@ -89,3 +93,5 @@ export default class GoodsList extends React.Component {
     );
   }
 }
+
+export default withRouter(GoodsList)

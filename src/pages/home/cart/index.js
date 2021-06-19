@@ -1,6 +1,7 @@
 import React from 'react'
 
 import TabBar from 'src/layouts/tabBar/Index.js'
+import Navbar from 'components/navbar'
 
 export default class Mine extends React.Component{
   constructor(props){
@@ -10,7 +11,9 @@ export default class Mine extends React.Component{
 
     render() {
       return(
-        <div>购物车
+        <div>
+          <Navbar title="购物车"/>
+          ddd
           <TabBar />
         </div>
       )

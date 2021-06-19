@@ -4,17 +4,19 @@
  * @Author: 曹双双
  * @Date: 2021-03-23 11:08:38
  * @LastEditors: 曹双双
- * @LastEditTime: 2021-05-25 17:23:33
+ * @LastEditTime: 2021-06-17 10:01:10
  */
 import React from "react";
 import Css from "./index.module.scss";
-import config from "src/assets/js/conf/config";
+import config from "src/config/config";
 import TabBar from "src/layouts/tabBar/Index.js";
 import SearchBar from "./components/searchBar";
 import AdSwiper from "./components/swiper";
 import QuickNav from "./components/nav";
 import Recommend from "./components/recommend";
 import GoodsClassify from "./components/classify";
+
+import {setScrollTop} from 'utils/index'
 
 export default class IndexComponent extends React.Component {
   constructor() {
@@ -26,6 +28,7 @@ export default class IndexComponent extends React.Component {
     this.bScroll = true;
   }
   componentDidMount() {
+    setScrollTop()
     window.addEventListener("scroll", this.eventScroll.bind(this));
   }
   componentWillUnmount() {
@@ -65,13 +68,13 @@ export default class IndexComponent extends React.Component {
         <AdSwiper />
 
         {/* 快速导航 */}
-        <QuickNav />
+        <QuickNav goPage={(url)=>this.goPage(url)}/>
 
         {/* 商品分类 */}
-        <GoodsClassify />
+        <GoodsClassify goPage={(url)=>this.goPage(url)}/>
 
         {/* 为您推荐 */}
-        <Recommend />
+        <Recommend goPage={(url)=>this.goPage(url)}/>
 
         {/* 底部tab */}
         <TabBar />

@@ -50,7 +50,6 @@ export default class SearchGoods extends React.Component {
   }
 
   onEndReached() {
-    console.log(this.state.isLoading, this.hasMore);
     if (!this.state.isLoading && !this.hasMore) {
       return;
     }
