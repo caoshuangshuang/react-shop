@@ -46,5 +46,15 @@ const routes=[
     path:'goods/detail',
     component:asyncComponents(()=>import('pages/goods/detail')),
   },
+  {
+    name:'会员登录',
+    path:'auth/login',
+    component:asyncComponents(()=>import('pages/auth/login')),
+  },
+  {
+    name:'会员注册',
+    path:'auth/regist',
+    component:asyncComponents(()=>import('pages/auth/regist')),
+  },
 ]
 export default routes

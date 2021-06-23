@@ -12,7 +12,7 @@ function Navbar(props) {
     <div className={Css["nav-bar-wrap"]}>
       <NavBar
         mode="light"
-        icon={<Icon type="left" className={Css["left-icon"]} />}
+        leftContent={props.hasLeft?<Icon type="left" className={Css["left-icon"]} />:''}
         onLeftClick={goBack}
         rightContent={props.rightCtn}
       >

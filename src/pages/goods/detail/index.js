@@ -1,11 +1,13 @@
 import React from "react";
+import { connect } from "react-redux";
 import Css from "./index.module.scss";
 import Product from "./components/product";
 import Detail from "./components/detail";
 import Evaluate from "./components/evaluate";
 
+import config from "src/config/config";
 import { setScrollTop, localParam } from "utils/index";
-export default class GoodDetail extends React.Component {
+ class GoodDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,6 +36,10 @@ export default class GoodDetail extends React.Component {
     this.setState({
       activeTab: tab.key,
     });
+  }
+
+  goPage(pUrl) {
+    this.props.history.push(config.path + pUrl);
   }
 
   goBack() {
@@ -65,8 +71,8 @@ export default class GoodDetail extends React.Component {
               </div>
             ))}
           </div>
-          <div className={Css["cart-icon"]}>
-            <div className={Css["spot"]}></div>
+          <div className={Css["cart-icon"]} onClick={()=>this.goPage('cart/index')}>
+            <div className={this.props.state.cart.aCartData.length?Css["spot"]:Css["spot"]+' hide'}></div>
           </div>
         </div>
         <div
@@ -100,3 +106,9 @@ export default class GoodDetail extends React.Component {
     );
   }
 }
+
+export default connect(state=>{
+  return{
+    state:state
+  }
+})(GoodDetail)

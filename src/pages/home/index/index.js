@@ -4,7 +4,7 @@
  * @Author: 曹双双
  * @Date: 2021-03-23 11:08:38
  * @LastEditors: 曹双双
- * @LastEditTime: 2021-06-17 10:01:10
+ * @LastEditTime: 2021-06-23 16:33:31
  */
 import React from "react";
 import Css from "./index.module.scss";
@@ -62,7 +62,7 @@ export default class IndexComponent extends React.Component {
     return (
       <div className={Css["page"]}>
         {/* 搜索 */}
-        <SearchBar bScroll={this.state.bScroll} goClassify={()=>this.goPage('goods/classify')} goSearch={()=>this.goPage('goods/search-keywords')}/>
+        <SearchBar bScroll={this.state.bScroll} goPage={(url)=>this.goPage(url)} />
 
         {/* 轮播 */}
         <AdSwiper />
