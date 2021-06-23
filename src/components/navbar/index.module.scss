@@ -3,3 +3,17 @@
   height: 30px;
   color:#000;
 }
+
+.nav-bar-wrap{
+  position: fixed;
+  top:0;
+  left: 0;
+  height: 45px;
+  width: 100%;
+  z-index:99;
+  border-bottom: 1px solid #efefef;
+}
+
+.height-fill{
+  height: 45px;
+}

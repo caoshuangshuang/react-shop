@@ -8,14 +8,20 @@ function Navbar(props) {
     props.history.goBack();
   }
   return (
-    <NavBar
-      mode="light"
-      icon={<Icon type="left" className={Css["left-icon"]} />}
-      onLeftClick={goBack}
-      rightContent={props.rightCtn}
-    >
-      {props.title}
-    </NavBar>
+    <>
+    <div className={Css["nav-bar-wrap"]}>
+      <NavBar
+        mode="light"
+        icon={<Icon type="left" className={Css["left-icon"]} />}
+        onLeftClick={goBack}
+        rightContent={props.rightCtn}
+      >
+        {props.title}
+      </NavBar>
+    </div>
+    <div className={Css['height-fill']}></div>
+    </>
+    
   );
 }
 

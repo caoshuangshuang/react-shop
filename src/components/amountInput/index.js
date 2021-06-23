@@ -1,12 +1,17 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import Css from './index.module.scss'
 
 export default function AmountInput (props){
 
-  const [amount,setAmount] =useState(0)
+  const [amount,setAmount] =useState(props.initialValue||1)
+
+  useEffect(()=>{
+    props.input(amount)
+  },[amount])
   // 输入改变
  function handleAmountChange(val){
     setAmount(val)
+    
   }
     // 增加数量
    function incAmount(){
@@ -15,7 +20,7 @@ export default function AmountInput (props){
   
     // 减少数量
    function decAmount(){
-      if(amount>=1){
+      if(amount>1){
        setAmount(amount-1)
       }
     }
@@ -23,18 +28,18 @@ export default function AmountInput (props){
     <div className={Css["amount-input-wrap"]}>
     <div
       className={
-        amount <= 0
+        amount <= 1
           ? Css["dec"] + " " + Css["disable"]
           : Css["dec"]
       }
-      onClick={()=>{decAmount()}}
+      onClick={()=>decAmount()}
     >
       -
     </div>
     <div className={Css["amount-input"]}>
       <input type="tel" name="" id="" value={amount}  onChange={e=>{handleAmountChange(e.target.value)}} />
     </div>
-    <div className={Css["inc"]} onClick={()=>{incAmount()}}>+</div>
+    <div className={Css["inc"]} onClick={()=>incAmount()}>+</div>
   </div>
   )
 }

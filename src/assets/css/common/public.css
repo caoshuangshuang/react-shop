@@ -27,6 +27,8 @@ html,body{
   margin-top:0.5rem;
   font-size: 0.8rem;
   text-align: center;
+  background: #fff;
+  padding:30px 0;
 }
 
 .hide{

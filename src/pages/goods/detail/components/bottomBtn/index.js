@@ -1,11 +1,15 @@
 import React from "react";
+import { connect } from "react-redux";
+
 import Css from "./index.module.scss";
+
 import { Toast } from "antd-mobile";
+import AmountInput from "components/amountInput";
 
 import { getGoodsInfo } from "src/services/goods";
-import AmountInput from 'components/amountInput'
+import action from "src/actions";
 
-export default class BottomBtn extends React.Component {
+class BottomBtn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +22,7 @@ export default class BottomBtn extends React.Component {
 
   // 显示购物控制面板
   showCartPanel() {
-    this.getAttr()
+    this.getAttr();
     this.setState({ sCartPanel: Css["up"], bMask: true });
   }
 
@@ -33,44 +37,70 @@ export default class BottomBtn extends React.Component {
   }
 
   // 选中属性值
-  selectAttr(index,vid) {
-    let aAttr=[...this.state.aAttr]
-    aAttr[index].selected=vid
-    this.setState({aAttr})
+  selectAttr(index, vid) {
+    let aAttr = [...this.state.aAttr];
+    aAttr[index].selected = vid;
+    this.setState({ aAttr });
   }
 
   // 检测是否选中属性值
-  checkAttr(){
-    let aAttr=this.state.aAttr
-    if(aAttr&&aAttr.length){
-      for(let item of aAttr){
-        if(!item.selected){
-          Toast.info('请选择'+item.title)
-          return
+  checkAttr() {
+    let aAttr = this.state.aAttr;
+    if (aAttr && aAttr.length) {
+      for (let item of aAttr) {
+        if (!item.selected) {
+          Toast.info("请选择" + item.title);
+          return;
         }
       }
     }
-    return true
+    return true;
   }
 
-  confirmAttr(){
-    if(this.checkAttr()){
-      this.hideCartPanel()
+  confirmAttr() {
+    if (this.checkAttr()) {
+      const selectedAttr = this.getSelectedAttr();
+      console.log(selectedAttr)
+      this.props.dispatch(
+        action.cart.addCart({
+          gid: this.props.detail.gid,
+          title: this.props.detail.title,
+          amount: this.state.amount,
+          price: this.props.detail.price,
+          img: this.props.detail.images[0],
+          freight: this.props.detail.freight,
+          attrs: selectedAttr,
+        })
+      );
+      this.hideCartPanel();
     }
   }
 
-    // 获取商品规格属性
-    getAttr() {
-      let param = {
-        type: "spec",
-        gid: this.props.detail.gid,
-      };
-      getGoodsInfo(param).then((res) => {
-        if (res.code === 200) {
-          this.setState({aAttr:res.data})
-        }
-      });
-    }
+  getSelectedAttr() {
+    let selectedAttr = [];
+    this.state.aAttr.forEach((ele) => {
+      let arr = JSON.parse(JSON.stringify(ele));
+      let find = arr.values.find((cur) => cur.vid === ele.selected);
+      arr.value = find.value;
+      arr.vid = find.vid;
+      delete arr.selected
+      selectedAttr.push(arr);
+    });
+    return selectedAttr;
+  }
+
+  // 获取商品规格属性
+  getAttr() {
+    let param = {
+      type: "spec",
+      gid: this.props.detail.gid,
+    };
+    getGoodsInfo(param).then((res) => {
+      if (res.code === 200) {
+        this.setState({ aAttr: res.data });
+      }
+    });
+  }
 
   render() {
     return (
@@ -109,7 +139,14 @@ export default class BottomBtn extends React.Component {
               <div className={Css["close"]}></div>
             </div>
             <div className={Css["goods-img"]}>
-              <img src={this.props.detail.images&&this.props.detail.images.length&&this.props.detail.images[0]} alt="" />
+              <img
+                src={
+                  this.props.detail.images &&
+                  this.props.detail.images.length &&
+                  this.props.detail.images[0]
+                }
+                alt=""
+              />
             </div>
             <div className={Css["goods-wrap"]}>
               <div className={Css["goods-title"]}>
@@ -137,7 +174,7 @@ export default class BottomBtn extends React.Component {
                                       : Css["val"]
                                   }
                                   onClick={() => {
-                                    this.selectAttr(index,subItem.vid);
+                                    this.selectAttr(index, subItem.vid);
                                   }}
                                 >
                                   {subItem.value}
@@ -153,12 +190,30 @@ export default class BottomBtn extends React.Component {
 
             <div className={Css["amount-wrap"]}>
               <div className={Css["amount-key"]}>购买数量</div>
-              <AmountInput value={this.state.value} input={(val)=>{this.setState({amount:val})}}/>
+              <AmountInput
+                value={this.state.value}
+                input={(val) => {
+                  this.setState({ amount: val });
+                }}
+              />
             </div>
           </div>
-          <div className={Css["sure-btn"]} onClick={()=>{this.confirmAttr()}}>确定</div>
+          <div
+            className={Css["sure-btn"]}
+            onClick={() => {
+              this.confirmAttr();
+            }}
+          >
+            确定
+          </div>
         </div>
       </>
     );
   }
 }
+
+export default connect((state) => {
+  return {
+    state: state,
+  };
+})(BottomBtn);
