@@ -2,7 +2,6 @@ let localCartData = localStorage["cartData"];
 let localTotal = localStorage["total"];
 let localIndexMap = localStorage["indexmap"];
 let localFreight = localStorage["freight"];
-console.log(localTotal, typeof localTotal, parseFloat(localTotal));
 let cartData = {
   aCartData: localCartData !== undefined ? JSON.parse(localCartData) : [],
   total: localTotal !== undefined ? parseFloat(localTotal) : 0,
