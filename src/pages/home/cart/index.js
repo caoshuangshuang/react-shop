@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 
 import Css from "./index.module.scss";
 import "./index.scss";
+import config from 'src/config/config'
 
 import TabBar from "src/layouts/tabBar/Index.js";
 import Navbar from "components/navbar";
@@ -26,6 +27,10 @@ class Cart extends React.Component {
         amount: val,
       })
     );
+  }
+
+  goPage(url){
+    this.props.history.push(config.path+url)
   }
 
   render() {
@@ -94,7 +99,7 @@ class Cart extends React.Component {
           <div className={Css["select-wrap"]}>
           合计：<span>{this.props.state.cart.total}</span>
           </div>
-          <div className={Css["orderend-btn"]}>去结算</div>
+          <div className={Css["orderend-btn"]} onClick={()=>this.goPage('goods/balance')}>去结算</div>
         </div>
         <TabBar />
       </div>

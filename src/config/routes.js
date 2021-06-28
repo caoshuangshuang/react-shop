@@ -56,5 +56,10 @@ const routes=[
     path:'auth/regist',
     component:asyncComponents(()=>import('pages/auth/regist')),
   },
+  {
+    name:'订单结算',
+    path:'goods/balance',
+    component:asyncComponents(()=>import('pages/goods/balance')),
+  },
 ]
 export default routes
