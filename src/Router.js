@@ -4,13 +4,13 @@
  * @Author: 曹双双
  * @Date: 2021-03-23 10:54:16
  * @LastEditors: 曹双双
- * @LastEditTime: 2021-05-21 21:13:29
+ * @LastEditTime: 2021-06-29 10:51:46
  */
 import React from 'react'
 import {HashRouter as Router,Route,Switch,Redirect} from 'react-router-dom'
 // import {PrivateRoute} from './router/private'
 import config from './assets/js/conf/config'
-import routes from 'src/config/routes.js'
+import routes from 'src/router/routes.js'
 
 export default class RouterComponent extends React.Component{
   constructor(props){

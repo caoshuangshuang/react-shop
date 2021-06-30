@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 
 import Css from "./index.module.scss";
+import config from 'src/config/config'
+import {getSelectAddress} from 'src/services/address'
 
 import Navbar from "components/navbar";
 
@@ -20,18 +22,44 @@ class Balance extends React.Component {
     
     this.state={
       orderList,
-      payAmount
+      payAmount,
+      addressInfo:{}
     }
+  }
+
+  componentDidMount(){
+    this.getSelectAddress()
+  }
+
+  // 获取收货地址
+  getSelectAddress(){
+    if(this.props.state.auth.userData&&sessionStorage['addressid']){
+      const param={
+        uid:this.props.state.auth.userData.uid,
+        aid:sessionStorage['addressid']
+      }
+      getSelectAddress(param).then(res=>{
+        if(res.code===200){
+
+          this.setState({addressInfo:res.data||{}})
+        }
+      })
+    }
+    
+  }
+
+  goPage(pUrl){
+    this.props.history.push(config.path+pUrl)
   }
 
   render() {
     return (
       <div className={Css["page"]}>
         <Navbar hasLeft="true" title="确认订单" />
-        <div className={Css["address-wrap"]}>
+        <div className={Css["address-wrap"]} onClick={()=>this.goPage('address/list')}>
           <div className={Css["person-info"]}>
-            <span>收货人：王五</span>
-            <span>手机号：19800000000</span>
+            <span>收货人：{this.state.addressInfo.name}</span>
+            <span>手机号：{this.state.addressInfo.cellphone}</span>
           </div>
           <div className={Css["address"]}>
             <img
@@ -39,7 +67,7 @@ class Balance extends React.Component {
               src={require("src/assets/images/home/cart/map.png")}
               alt=""
             />
-            <span>收货地址：哒哒哒哒哒哒多多多多多多多</span>
+            <span>收货地址：{this.state.addressInfo.province}{this.state.addressInfo.city}{this.state.addressInfo.area}{this.state.addressInfo.address}</span>
           </div>
           <div className={Css["arrow"]}></div>
           <div className={Css["address-border-wrap"]}>

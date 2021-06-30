@@ -1,0 +1,99 @@
+.page{
+  width: 100%;
+  min-height: 100vh;
+  background: #fff;
+
+  .main{
+    .address-nav{
+      height: 40px;
+      width: 100%;
+      background: #D3C6BE;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding:0 10px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    .address-list{
+      width: 100%;
+      height: 110px;
+      border-bottom: 1px solid #c6c6c6;
+
+      .address-info-wrap{
+        width: 90%;
+        height: 70px;
+        border-bottom: 1px dashed #c6c6c6;
+        display: flex;
+        margin:0 auto;
+        align-items: center;
+
+        .check-mark{
+          width: 20px;
+          height: 20px;
+          background: url('~src/assets/images/home/cart/gou.png') no-repeat center / 100%;
+          margin-right: 15px;
+        }
+
+        .address-info{
+          &.default{
+            width: 90%;
+          }
+          width: 100%;
+
+          .person{
+            width: 100%;
+            height: 23px;
+            border-bottom: 1px solid #efefef;
+            font-size: 14px;
+            overflow: hidden;
+          }
+
+          .default{
+            padding:2px 5px;
+            background: #fdb709;
+            color:#fff;
+            border-radius: 5px;
+            font-size: 12px;
+            margin-right: 5px;
+          }
+
+          .address{
+            width: 100%;
+            height: 30px;
+            font-size: 16px;
+            overflow: hidden;
+            line-height: 30px;
+            margin-top:5px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+
+      .handle-wrap{
+        width: 100%;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content:flex-end;
+        padding-right: 15px;
+        box-sizing: border-box;
+
+        .edit{
+          width: 20px;
+          height: 20px;
+          background: url('~src/assets/images/home/cart/edit.png') no-repeat center / 100%;
+          margin-right: 15px;
+        }
+
+        .del{
+          width: 20px;
+          height: 20px;
+          background: url('~src/assets/images/home/cart/del.png') no-repeat center / 100%;
+        }
+      }
+    }
+  }
+}

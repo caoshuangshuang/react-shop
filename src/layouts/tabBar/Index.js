@@ -10,7 +10,7 @@ import React from "react";
 import {withRouter} from 'react-router-dom'
 import Css from "./index.module.scss";
 import config from "src/assets/js/conf/config";
-import routes from 'src/config/routes.js'
+import routes from 'src/router/routes.js'
 
 const tabMenu=routes.filter((item)=>item.isTabBar)
 

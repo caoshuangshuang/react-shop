@@ -61,5 +61,15 @@ const routes=[
     path:'goods/balance',
     component:asyncComponents(()=>import('pages/goods/balance')),
   },
+  {
+    name:'添加收货地址',
+    path:'address/add',
+    component:asyncComponents(()=>import('pages/address/add-address')),
+  },
+  {
+    name:'管理收货地址',
+    path:'address/list',
+    component:asyncComponents(()=>import('pages/address/manage-address')),
+  },
 ]
 export default routes
