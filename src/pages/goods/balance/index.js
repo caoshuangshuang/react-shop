@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import Css from "./index.module.scss";
 import config from 'src/config/config'
-import {getSelectAddress} from 'src/services/address'
+import {getSelectAddress,getDefaultAddress,listAddress} from 'src/services/address'
 
 import Navbar from "components/navbar";
 
@@ -28,10 +28,14 @@ class Balance extends React.Component {
   }
 
   componentDidMount(){
-    this.getSelectAddress()
+    if(sessionStorage['addressid']){
+      this.getSelectAddress()
+    }else{
+      this.getDefaultAddress()
+    }
   }
 
-  // 获取收货地址
+  // 获取选择的收货地址
   getSelectAddress(){
     if(this.props.state.auth.userData&&sessionStorage['addressid']){
       const param={
@@ -45,7 +49,34 @@ class Balance extends React.Component {
         }
       })
     }
-    
+  }
+
+  // 获取默认收货地址
+  getDefaultAddress(){
+    if(this.props.state.auth.userData){
+      const param={
+        uid:this.props.state.auth.userData.uid,
+      }
+      getDefaultAddress(param).then(res=>{
+        if(res.code===200&&Object.keys(res.data).length){
+          this.setState({addressInfo:res.data||{}})
+        }else{
+          this.getFirstAddress()
+        }
+      })
+    }
+  }
+
+  // 获取收货地址列表第一个地址
+  getFirstAddress(){
+    const param = {
+      uid: this.props.state.auth.userData.uid,
+    };
+    listAddress(param).then((res) => {
+      if (res.code === 200&&res.data&&res.data.length) {
+        this.setState({ addressInfo: res.data[0] });
+      }
+    });
   }
 
   goPage(pUrl){
@@ -69,6 +100,7 @@ class Balance extends React.Component {
             />
             <span>收货地址：{this.state.addressInfo.province}{this.state.addressInfo.city}{this.state.addressInfo.area}{this.state.addressInfo.address}</span>
           </div>
+          <div className={!Object.keys(this.state.addressInfo).length?Css['address-null']:'hide'}>您的收货地址为空，点击添加收货地址吧</div>
           <div className={Css["arrow"]}></div>
           <div className={Css["address-border-wrap"]}>
             <div className={Css["trapezoid"] + " " + Css["style1"]}></div>
@@ -99,7 +131,7 @@ class Balance extends React.Component {
                     {
                       item.attrs&&item.attrs.length?item.attrs.map((attr,i)=>{
                         return (
-                          <span index={i}>{attr.title}：{attr.value}</span>
+                          <span key={i} index={i}>{attr.title}：{attr.value}</span>
                         )
                       }):''
                     }

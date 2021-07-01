@@ -36,4 +36,10 @@ export const getSelectAddress=(param={})=>{
   )
 }
 
-
+// 获取默认收货地址
+export const getDefaultAddress=(param={})=>{
+  param.token=config.token
+  return request(
+    '/api/user/address/defaultAddress'+genUrlParam(param),'GET',param
+  )
+}

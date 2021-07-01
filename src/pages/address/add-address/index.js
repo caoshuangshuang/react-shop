@@ -42,6 +42,8 @@ class AddAddress extends React.Component {
           Toast.info('添加成功',2,()=>{
             this.goPage('address/list')
           })
+        }else{
+          Toast.info(res.data,2)
         }
       })
     }

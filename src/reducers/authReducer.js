@@ -1,5 +1,4 @@
 const localUserData = localStorage.getItem("userData")
-console.log(localUserData,localUserData !== undefined)
 const authData={
   userData:localUserData !== undefined ? JSON.parse(localUserData) : []
 }
