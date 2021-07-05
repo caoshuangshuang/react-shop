@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 
 import config from "src/config/config";
 import Css from "./index.module.scss";
-import { listAddress ,delAddress} from "src/services/address";
+import { listAddress, delAddress } from "src/services/address";
 
 import Navbar from "components/navbar";
-import { Modal,Toast } from "antd-mobile";
+import { Modal, Toast } from "antd-mobile";
 
 class AddressList extends React.Component {
   constructor(props) {
@@ -26,19 +26,21 @@ class AddressList extends React.Component {
 
   // 获取收货地址列表
   getAddress() {
-    const param = {
-      uid: this.props.state.auth.userData.uid,
-    };
-    listAddress(param).then((res) => {
-      if (res.code === 200) {
-        this.setState({ addressList: res.data || [] });
-      }
-    });
+    if (this.props.state.auth && this.props.state.auth.userData) {
+      const param = {
+        uid: this.props.state.auth.userData.uid,
+      };
+      listAddress(param).then((res) => {
+        if (res.code === 200) {
+          this.setState({ addressList: res.data || [] });
+        }
+      });
+    }
   }
 
   // 删除收货地址
-  delAddress(index,aid,e) {
-    e.stopPropagation()
+  delAddress(index, aid, e) {
+    e.stopPropagation();
     Modal.alert("", "确认删除吗？", [
       {
         text: "取消",
@@ -48,29 +50,35 @@ class AddressList extends React.Component {
       {
         text: "确定",
         onPress: () => {
-          let addressList=this.state.addressList
-          addressList.splice(index,1)
+          let addressList = this.state.addressList;
+          addressList.splice(index, 1);
           this.setState({
-            addressList
-          })
-          let param={
-            uid:this.props.state.auth.userData.uid,
-            aid:aid
-          }
-          delAddress(param).then(res=>{
-            if(res.code===200){
-              Toast.info('删除成功',2)
+            addressList,
+          });
+          let param = {
+            uid: this.props.state.auth.userData.uid,
+            aid: aid,
+          };
+          delAddress(param).then((res) => {
+            if (res.code === 200) {
+              Toast.info("删除成功", 2);
             }
-          })
+          });
         },
       },
     ]);
   }
 
+  // 修改收货地址
+  editAddress(e, aid) {
+    e.stopPropagation();
+    this.props.history.push(config.path + "address/add?aid=" + aid);
+  }
+
   // 选择收货地址
-  selectAddress(aid){
-    sessionStorage['addressid']=aid
-    this.props.history.replace(config.path+'goods/balance')
+  selectAddress(aid) {
+    sessionStorage["addressid"] = aid;
+    this.props.history.replace(config.path + "goods/balance");
   }
 
   render() {
@@ -87,7 +95,11 @@ class AddressList extends React.Component {
           {this.state.addressList && this.state.addressList.length
             ? this.state.addressList.map((item, index) => {
                 return (
-                  <div key={index} className={Css["address-list"]} onClick={()=>this.selectAddress(item.aid)}>
+                  <div
+                    key={index}
+                    className={Css["address-list"]}
+                    onClick={() => this.selectAddress(item.aid)}
+                  >
                     <div className={Css["address-info-wrap"]}>
                       <div
                         className={
@@ -122,10 +134,13 @@ class AddressList extends React.Component {
                       </div>
                     </div>
                     <div className={Css["handle-wrap"]}>
-                      <div className={Css["edit"]}></div>
+                      <div
+                        className={Css["edit"]}
+                        onClick={(e) => this.editAddress(e, item.aid)}
+                      ></div>
                       <div
                         className={Css["del"]}
-                        onClick={(e) => this.delAddress(index,item.aid,e)}
+                        onClick={(e) => this.delAddress(index, item.aid, e)}
                       ></div>
                     </div>
                   </div>

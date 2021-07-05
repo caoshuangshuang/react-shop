@@ -4,8 +4,9 @@ import {connect} from 'react-redux'
 import Css from "./index.module.scss";
 import "./index.scss";
 import { province } from "src/config/province";
-import {addAddress} from 'src/services/address'
+import {addAddress,getAddressInfo,editAddress} from 'src/services/address'
 import config from 'src/config/config'
+import {localParam} from 'utils/index'
 
 import Navbar from "components/navbar";
 import { List, InputItem, Button, Picker ,Toast} from "antd-mobile";
@@ -20,8 +21,13 @@ class AddAddress extends React.Component {
       name: "",
       phone: "",
       address: "",
-      isDefault: false,
+      isdefault: false,
     };
+    this.aid=localParam(this.props.location.search).search.aid
+  }
+
+  componentDidMount(){
+    this.getAddressInfo()
   }
 
   saveForm(){
@@ -33,20 +39,58 @@ class AddAddress extends React.Component {
         cellphone:this.state.phone,
         province,
         city,
-        area,
         address:this.state.address,
-        isDefault:this.state.isDefault?"1":"0"
+        isdefault:this.state.isdefault?"1":"0"
       }
-      addAddress(param).then(res=>{
+      if(area){
+        param.area=area
+      }
+      if(this.aid){
+        param.aid=this.aid
+        editAddress(param).then(res=>{
+          if(res.code===200){
+            Toast.info('修改成功',2,()=>{
+              this.goPage('address/list')
+            })
+          }else{
+            Toast.info(res.data,2)
+          }
+        })
+      }else{
+        addAddress(param).then(res=>{
+          if(res.code===200){
+            Toast.info('添加成功',2,()=>{
+              this.goPage('address/list')
+            })
+          }else{
+            Toast.info(res.data,2)
+          }
+        })
+      }
+     
+    }
+  }
+
+  // 获取收货地址信息
+  getAddressInfo(){
+    if(this.props.state.auth&&this.props.state.auth.userData&&this.aid){
+      const param={
+        aid:this.aid,
+        uid:this.props.state.auth.userData.uid
+      }
+      getAddressInfo(param).then(res=>{
         if(res.code===200){
-          Toast.info('添加成功',2,()=>{
-            this.goPage('address/list')
+          this.setState({
+            area: [res.data.province,res.data.city,res.data.area],
+            name:res.data.name,
+            phone: res.data.cellphone,
+            address: res.data.address,
+            isdefault: +res.data.isdefault===1?true:false,
           })
-        }else{
-          Toast.info(res.data,2)
         }
       })
     }
+    
   }
 
   goPage(pUrl){
@@ -81,7 +125,7 @@ class AddAddress extends React.Component {
   render() {
     return (
       <div className={Css["page"]}>
-        <Navbar hasLeft={true} title="添加收货地址" />
+        <Navbar hasLeft={true} title={this.aid?'修改收货地址':'添加收货地址'} />
         <List>
           <InputItem
             clear
@@ -126,10 +170,10 @@ class AddAddress extends React.Component {
             <input
               type="checkbox"
               className={Css["check-box"]}
-              checked={this.state.isDefault}
+              checked={this.state.isdefault}
               onChange={(e) =>
                 this.setState({
-                  isDefault: !this.state.isDefault,
+                  isdefault: !this.state.isdefault,
                 })
               }
             />

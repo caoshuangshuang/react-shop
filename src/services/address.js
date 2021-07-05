@@ -43,3 +43,21 @@ export const getDefaultAddress=(param={})=>{
     '/api/user/address/defaultAddress'+genUrlParam(param),'GET',param
   )
 }
+
+// 获取收货地址信息
+export const getAddressInfo=(param={})=>{
+  param.token=config.token
+  return request(
+    '/api/user/address/info'+genUrlParam(param),'GET',param
+  )
+}
+
+// 修改收货地址
+export const editAddress=(param={})=>{
+  const args={
+    token:config.token
+  }
+  return request(
+    '/api/user/address/mod'+genUrlParam(args),'POST',param
+  )
+}

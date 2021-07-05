@@ -98,7 +98,7 @@ class Balance extends React.Component {
               src={require("src/assets/images/home/cart/map.png")}
               alt=""
             />
-            <span>收货地址：{this.state.addressInfo.province}{this.state.addressInfo.city}{this.state.addressInfo.area}{this.state.addressInfo.address}</span>
+            <span>收货地址：{this.state.addressInfo.province}{this.state.addressInfo.city}{this.state.addressInfo.area!=='undefined'?this.state.addressInfo.area:''}{this.state.addressInfo.address}</span>
           </div>
           <div className={!Object.keys(this.state.addressInfo).length?Css['address-null']:'hide'}>您的收货地址为空，点击添加收货地址吧</div>
           <div className={Css["arrow"]}></div>
