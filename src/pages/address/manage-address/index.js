@@ -78,7 +78,7 @@ class AddressList extends React.Component {
   // 选择收货地址
   selectAddress(aid) {
     sessionStorage["addressid"] = aid;
-    this.props.history.replace(config.path + "goods/balance");
+    this.props.history.replace(config.path + "order/balance");
   }
 
   render() {

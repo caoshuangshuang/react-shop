@@ -8,7 +8,7 @@ import config from 'src/config/config'
 
 import TabBar from "src/layouts/tabBar/Index.js";
 import Navbar from "components/navbar";
-import { Checkbox,List } from "antd-mobile";
+import { Checkbox,List, Toast } from "antd-mobile";
 import AmountInput from "components/amountInput";
 
 import action from "src/actions";
@@ -27,6 +27,18 @@ class Cart extends React.Component {
         amount: val,
       })
     );
+  }
+
+  goBalance(){
+    if(this.props.state.cart&&this.props.state.cart.aCartData&&this.props.state.cart.aCartData.length){
+      if(!Object.keys(this.props.state.cart.indexmap).length){
+        Toast.info('请先选择要结算的商品哦',2)
+      }else{
+        this.goPage('order/balance')
+      }
+    }else{
+      Toast.info('请先将商品加入购物车哦',2)
+    }
   }
 
   goPage(url){
@@ -99,7 +111,7 @@ class Cart extends React.Component {
           <div className={Css["select-wrap"]}>
           合计：<span>{this.props.state.cart.total}</span>
           </div>
-          <div className={Css["orderend-btn"]} onClick={()=>this.goPage('goods/balance')}>去结算</div>
+          <div className={Css["orderend-btn"]} onClick={()=>this.goBalance()}>去结算</div>
         </div>
         <TabBar />
       </div>

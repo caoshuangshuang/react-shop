@@ -58,8 +58,13 @@ const routes=[
   },
   {
     name:'订单结算',
-    path:'goods/balance',
-    component:asyncComponents(()=>import('pages/goods/balance')),
+    path:'order/balance',
+    component:asyncComponents(()=>import('pages/order/balance')),
+  },
+  {
+    name:'提交订单',
+    path:'order/end',
+    component:asyncComponents(()=>import('pages/order/end')),
   },
   {
     name:'添加收货地址',

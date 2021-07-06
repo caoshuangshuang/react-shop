@@ -4,8 +4,10 @@ import { connect } from "react-redux";
 import Css from "./index.module.scss";
 import config from 'src/config/config'
 import {getSelectAddress,getDefaultAddress,listAddress} from 'src/services/address'
+import {submitOrder} from 'src/services/order'
 
 import Navbar from "components/navbar";
+import { Toast } from "antd-mobile";
 
 class Balance extends React.Component {
   constructor(props){
@@ -77,6 +79,25 @@ class Balance extends React.Component {
         this.setState({ addressInfo: res.data[0] });
       }
     });
+  }
+
+  // 提交订单
+  submitOrder(){
+    if(!this.state.addressInfo){
+      Toast.info('请选择收货地址')
+    }else{
+      const param={
+        uid:this.props.state.auth.userData.uid,
+        freight:this.props.state.cart.freight,
+        addsid:this.state.addressInfo.aid,
+        goodsData:JSON.stringify(this.props.state.cart.aCartData)
+      }
+      submitOrder(param).then(res=>{
+        if(res.code===200){
+          this.goPage('order/end')
+        }
+      })
+    }
   }
 
   goPage(pUrl){
@@ -152,7 +173,7 @@ class Balance extends React.Component {
           <div className={Css["price-wrap"]}>
             实付金额：<span>￥{this.state.payAmount}</span>
           </div>
-          <div className={Css["balance-btn"]}>提交订单</div>
+          <div className={Css["balance-btn"]} onClick={()=>this.submitOrder()}>提交订单</div>
         </div>
       </div>
     );
