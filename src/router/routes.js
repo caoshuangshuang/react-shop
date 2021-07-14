@@ -76,5 +76,10 @@ const routes=[
     path:'address/list',
     component:asyncComponents(()=>import('pages/address/manage-address')),
   },
+  {
+    name:'个人资料',
+    path:'user/profile',
+    component:asyncComponents(()=>import('pages/user/profile')),
+  },
 ]
 export default routes

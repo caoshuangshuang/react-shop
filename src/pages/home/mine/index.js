@@ -9,6 +9,7 @@ import { userLogout } from "src/services/auth";
 import Css from "./index.module.scss";
 import action from "src/actions";
 import { getUserInfo } from "src/services/user";
+import config from 'src/config/config'
 
 class Mine extends React.Component {
   constructor(props) {
@@ -34,7 +35,7 @@ class Mine extends React.Component {
         userLogout(param).then((res) => {
           if (res.code === 200) {
             this.props.dispatch(action.auth.logout());
-            this.props.history.replace("/home/index");
+            this.props.history.replace(config.path+"home/index");
           }
         });
       }}
@@ -60,6 +61,10 @@ class Mine extends React.Component {
         }
       });
     }
+  }
+
+  pushPage(url){
+    this.props.history.push(config.path+url)
   }
 
   render() {
@@ -92,7 +97,7 @@ class Mine extends React.Component {
           </div>
         </div>
         <div className={Css["menu-list-wrap"]}>
-          <ul>
+          <ul onClick={()=>this.pushPage('user/profile')}>
             <li>个人资料</li>
             <li></li>
           </ul>
