@@ -20,4 +20,12 @@ export const lastordernum=(param={})=>{
   )
 }
 
+// 我的订单
+export const getMyOrder=(param={})=>{
+  param.token=config.token
+  return request(
+    '/api/user/myorder/index'+genUrlParam(param)
+  )
+}
+
 

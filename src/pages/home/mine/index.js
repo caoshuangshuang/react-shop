@@ -80,20 +80,20 @@ class Mine extends React.Component {
         </div>
         <div className={Css["order-name-wrap"]}>
           <div className={Css["order-name"]}>全部订单</div>
-          <div className={Css["show-order"]}>查看全部订单 &gt;</div>
+          <div className={Css["show-order"]} onClick={()=>this.pushPage('order/my-order?status=all')}>查看全部订单 &gt;</div>
         </div>
         <div className={Css["order-status-wrap"]}>
           <div className={Css["item"]}>
             <div className={Css["icon"] + " " + Css["wait"]}></div>
-            <div className={Css["text"]}>待支付</div>
+            <div className={Css["text"]} onClick={()=>this.pushPage('order/my-order?status=0')}>待支付</div>
           </div>
           <div className={Css["item"]}>
             <div className={Css["icon"] + " " + Css["take"]}></div>
-            <div className={Css["text"]}>待收货</div>
+            <div className={Css["text"]} onClick={()=>this.pushPage('order/my-order?status=1')}>待收货</div>
           </div>
           <div className={Css["item"]}>
             <div className={Css["icon"] + " " + Css["comment"]}></div>
-            <div className={Css["text"]}>待评价</div>
+            <div className={Css["text"]} onClick={()=>this.pushPage('order/my-order?status=2')}>待评价</div>
           </div>
         </div>
         <div className={Css["menu-list-wrap"]}>

@@ -81,5 +81,10 @@ const routes=[
     path:'user/profile',
     component:asyncComponents(()=>import('pages/user/profile')),
   },
+  {
+    name:'全部订单',
+    path:'order/my-order',
+    component:asyncComponents(()=>import('pages/order/myOrder')),
+  },
 ]
 export default routes
