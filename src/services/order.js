@@ -28,4 +28,28 @@ export const getMyOrder=(param={})=>{
   )
 }
 
+// 取消订单
+export const cancelOrder=(param={})=>{
+  param.token=config.token
+  return request(
+    '/api/user/myorder/clearorder'+genUrlParam(param)
+  )
+}
+
+// 确认收货
+export const confirmOrder=(param={})=>{
+  param.token=config.token
+  return request(
+    '/api/user/myorder/finalorder'+genUrlParam(param)
+  )
+}
+
+// 我的待评价订单
+export const reviewOrder=(param={})=>{
+  param.token=config.token
+  return request(
+    '/api/user/myorder/reviewOrder'+genUrlParam(param)
+  )
+}
+
 

@@ -21,7 +21,10 @@ function ReviewItem(props) {
             </div>
             <div className={Css['title']}>{item.title}</div>
             <div className={Css['amount']}>x{item.amount}</div>
-            <div className={Css['status-btn']}>评价</div>
+            {
+              props.data.isreview==='0'? <div className={Css['status-btn']}>评价</div>: <div className={Css['status-btn']}>追加评价</div>
+            }
+           
           </div>
           )):''
         }
