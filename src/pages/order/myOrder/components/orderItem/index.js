@@ -1,6 +1,9 @@
 import React from "react";
+import {withRouter} from 'react-router-dom'
+
 import Css from "./index.module.scss";
 import { Modal } from "antd-mobile";
+import config from 'src/config/config'
 
 function OrderItem(props) {
   const statusMap = {
@@ -9,7 +12,8 @@ function OrderItem(props) {
     2: "待评价",
   };
 
-  function cancelOrder(id) {
+  function cancelOrder(id,e) {
+    e.stopPropagation()
     Modal.alert("", "确认取消订单吗？", [
       { text: "取消", onPress: () => {} },
       {
@@ -21,7 +25,8 @@ function OrderItem(props) {
     ]);
   }
 
-  function confirmOrder(id){
+  function confirmOrder(id,e){
+    e.stopPropagation()
     Modal.alert("", "确定您已收货？", [
       { text: "取消", onPress: () => {} },
       {
@@ -32,8 +37,12 @@ function OrderItem(props) {
       },
     ]);
   }
+
+  function goDetail(num){
+    props.history.push(config.path+'order/detail?ordernum='+num)
+  }
   return (
-    <div className={Css["order-list"]}>
+    <div className={Css["order-list"]} onClick={()=>goDetail(props.data.ordernum)}>
       <div className={Css["ordernum-wrap"]}>
         <div className={Css["ordernum"]}>订单编号：{props.data.ordernum}</div>
         <div className={Css["status"]}>{statusMap[props.data.status]}</div>
@@ -54,14 +63,14 @@ function OrderItem(props) {
         {props.data.status === "0" ? (
           <div
             className={Css["status-btn"]}
-            onClick={() => cancelOrder(props.data.ordernum)}
+            onClick={(e) => cancelOrder(props.data.ordernum,e)}
           >
             取消订单
           </div>
         ) : props.data.status === "1" ? (
           <div
             className={Css["status-btn"]}
-            onClick={() => confirmOrder(props.data.ordernum)}
+            onClick={(e) => confirmOrder(props.data.ordernum,e)}
           >
             确认收货
           </div>
@@ -73,4 +82,4 @@ function OrderItem(props) {
   );
 }
 
-export default OrderItem;
+export default withRouter(OrderItem);

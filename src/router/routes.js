@@ -86,5 +86,10 @@ const routes=[
     path:'order/my-order',
     component:asyncComponents(()=>import('pages/order/myOrder')),
   },
+  {
+    name:'订单详情',
+    path:'order/detail',
+    component:asyncComponents(()=>import('pages/order/detail')),
+  },
 ]
 export default routes

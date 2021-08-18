@@ -52,4 +52,10 @@ export const reviewOrder=(param={})=>{
   )
 }
 
-
+// 订单详情
+export const getOrderDetail=(param={})=>{
+  param.token=config.token
+  return request(
+    '/api/user/myorder/desc'+genUrlParam(param)
+  )
+}

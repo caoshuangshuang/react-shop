@@ -4,7 +4,7 @@
  * @Author: 曹双双
  * @Date: 2021-03-23 10:53:55
  * @LastEditors: 曹双双
- * @LastEditTime: 2021-06-10 14:16:37
+ * @LastEditTime: 2021-08-16 18:58:14
  */
 import "babel-polyfill";
 import "url-search-params-polyfill";
@@ -20,6 +20,7 @@ import 'lib-flexible'
 
 import "./assets/css/common/public.css";
 import "./assets/css/iconfont/index.css"
+import './assets/css/common/mixin.scss'
 
 let store = createStore(reducers);
 class Index extends React.Component {

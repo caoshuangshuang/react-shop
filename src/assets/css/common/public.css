@@ -39,3 +39,11 @@ html,body{
   height: 0px;
   overflow: hidden;
 }
+
+.clearfix::after{
+  display: block;
+  clear: both;
+  content: '';
+  visibility: hidden;
+  height: 0;
+}
